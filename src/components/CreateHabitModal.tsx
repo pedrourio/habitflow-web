@@ -1,46 +1,63 @@
 // src/components/CreateHabitModal.tsx
-
 import { Modal, Form, Input, Button, message } from 'antd';
+import { useEffect } from 'react';
 import api from '../services/api';
-import { Habit } from '../types/api';
+import type { Habit } from '../types/api';
 
-// Definimos os tipos das propriedades que este componente recebe
 interface CreateHabitModalProps {
   open: boolean;
   onClose: () => void;
-  onHabitCreated: (newHabit: Habit) => void;
+  onHabitUpdated: (updatedHabit: Habit) => void; 
+  habitToEdit: Habit | null; // Nova prop para receber o hábito a ser editado
 }
 
-export default function CreateHabitModal({ open, onClose, onHabitCreated }: CreateHabitModalProps) {
+export default function CreateHabitModal({ open, onClose, onHabitUpdated, habitToEdit }: CreateHabitModalProps) {
   const [form] = Form.useForm();
+  const isEditing = !!habitToEdit; // Variável para saber se estamos editando
+
+  //Efeito para preencher o formulário quando um hábito é passado para edição
+  useEffect(() => {
+    if (habitToEdit) {
+      form.setFieldsValue({
+        name: habitToEdit.name,
+        description: habitToEdit.description,
+      });
+    } else {
+      form.resetFields();
+    }
+  }, [habitToEdit, form]);
 
   const onFinish = async (values: { name: string; description: string }) => {
     try {
-      const response = await api.post('/api/v1/habits', {
-        habit: {
-          name: values.name,
-          description: values.description,
-        },
-      });
+      const payload = { habit: { name: values.name, description: values.description } };
+      let response;
 
-      message.success('Hábito criado com sucesso!');
-      onHabitCreated(response.data); // Envia o novo hábito de volta para a página do dashboard
-      form.resetFields(); // Limpa o formulário
-      onClose(); // Fecha o modal
+      // Lógica para decidir entre criar (POST) ou atualizar (PUT)
+      if (isEditing) {
+        response = await api.put(`/api/v1/habits/${habitToEdit.id}`, payload);
+        message.success('Hábito atualizado com sucesso!');
+      } else {
+        response = await api.post('/api/v1/habits', payload);
+        message.success('Hábito criado com sucesso!');
+      }
+
+      onHabitUpdated(response.data);
+      onClose();
     } catch (error) {
-      console.error('Falha ao criar hábito:', error);
-      message.error('Não foi possível criar o hábito.');
+      console.error('Falha ao salvar hábito:', error);
+      message.error('Não foi possível salvar o hábito.');
     }
   };
 
   return (
     <Modal
-      title="Criar Novo Hábito"
+      title={isEditing ? 'Editar Hábito' : 'Criar Novo Hábito'} // 5. Título dinâmico
       open={open}
       onCancel={onClose}
-      footer={null} // Remove os botões de rodapé padrão, pois usaremos o do formulário
+      footer={null}
     >
       <Form form={form} layout="vertical" onFinish={onFinish} requiredMark="optional">
+        {}
         <Form.Item
           label="Nome do Hábito"
           name="name"
@@ -58,7 +75,7 @@ export default function CreateHabitModal({ open, onClose, onHabitCreated }: Crea
 
         <Form.Item>
           <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
-            Criar Hábito
+            {isEditing ? 'Salvar Alterações' : 'Criar Hábito'} {/* 6. Texto do botão dinâmico */}
           </Button>
         </Form.Item>
       </Form>

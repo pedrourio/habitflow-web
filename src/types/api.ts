@@ -14,6 +14,7 @@ export interface Habit {
   user_id: number;
   created_at: string; // Datas vêm como string no JSON
   updated_at: string;
+  checkins: Checkin[];
 }
 
 export interface Checkin {

@@ -1,14 +1,17 @@
 // src/pages/LoginPage.tsx
 
-import { Button, Form, Input, Layout, message, Typography } from 'antd';
+import { Button, Form, Input, Layout, message, theme, Typography } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const { Content } = Layout;
 const { Title } = Typography;
 
+
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { token } = theme.useToken();
 
   const onFinish = async (values: any) => {
     try {
@@ -41,7 +44,7 @@ export default function LoginPage() {
 
   return (
     <Layout style={{ minHeight: '100vh', justifyContent: 'center', alignItems: 'center' }}>
-      <Content style={{ width: '100%', maxWidth: '400px', padding: '24px', background: '#fff', borderRadius: '8px' }}>
+      <Content style={{ width: '100%', maxWidth: '400px', padding: '24px', background: token.colorBgContainer, borderRadius: '8px' }}>
         <Title level={2} style={{ textAlign: 'center' }}>Login</Title>
         <Form
           name="login"
@@ -71,6 +74,10 @@ export default function LoginPage() {
               Entrar
             </Button>
           </Form.Item>
+
+            <div style={{ textAlign: 'center' }}>
+                Não tem uma conta? <Link to="/signup">Cadastre-se!</Link>
+            </div>
         </Form>
       </Content>
     </Layout>
