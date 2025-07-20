@@ -24,6 +24,8 @@ const AppLayout: React.FC = () => {
   const handleMenuClick = ({ key }: { key: string }) => {
     if (key === '1') {
       navigate('/dashboard');
+    } else if (key === '2') {
+      navigate('/profile');
     } else if (key === '3') {
       handleLogout();
     }

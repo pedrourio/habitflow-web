@@ -5,6 +5,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import AppLayout from './components/AppLayout';
+import ProfilePage from './pages/ProfilePage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'dashboard',
         element: <DashboardPage />,
+      },
+      {
+        path: 'profile',
+        element: <ProfilePage />,
       },
     ],
   },
