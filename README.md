@@ -1,70 +1,60 @@
-# React + TypeScript + Vite
+# HabitFlow Web ☀️🌙
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend web para a aplicação HabitFlow, um rastreador de hábitos moderno e elegante. Construído com React, TypeScript e Ant Design, consumindo a [HabitFlow API](https://github.com/[seu-usuario]/habitflow-api).
 
-Currently, two official plugins are available:
+![Placeholder para GIF/Screenshot da sua aplicação]
+*(Dica: Grave um GIF curto da sua aplicação em uso e substitua o link acima)*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+### ✨ Principais Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Interface Reativa:** Construída com React e TypeScript para uma experiência de usuário rápida e segura.
+* **Design System Profissional:** Utiliza o Ant Design para uma UI consistente e elegante.
+* **Fluxo de Autenticação Completo:** Páginas de Login e Cadastro que se comunicam com a API via tokens JWT.
+* **Dashboard Completo:**
+    * Visualização da lista de hábitos.
+    * Criação, Edição e Exclusão de hábitos através de modais.
+    * Funcionalidade de Check-in diário com feedback visual imediato.
+    * Filtros para organizar os hábitos.
+* **Tema Claro/Escuro:** Seletor de tema com persistência da escolha do usuário.
+* **Página de Perfil:** Permite ao usuário visualizar e atualizar suas informações.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🛠️ Tecnologias e Ferramentas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+* **React 18**
+* **TypeScript**
+* **Vite** como ambiente de desenvolvimento e build tool.
+* **Ant Design** para a biblioteca de componentes e sistema de temas.
+* **React Router DOM** para o roteamento de páginas.
+* **Axios** para as requisições à API.
+* **Conventional Commits** e **Gitmojis** para o controle de versão.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🚀 Começando (Setup Local)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# habitflow-web
+1.  **Pré-requisitos:** Node.js e `npm` (via `nvm`) instalados. **A API [HabitFlow API](https://github.com/[seu-usuario]/habitflow-api) deve estar rodando localmente em `http://localhost:3000`**.
+2.  Clone o repositório: `git clone https://github.com/[seu-usuario]/habitflow-web.git`
+3.  Instale as dependências: `npm install`
+4.  Configure as variáveis de ambiente. Crie um arquivo chamado `.env.local` na raiz do projeto e adicione a URL da sua API:
+    ```
+    VITE_API_URL=http://localhost:3000
+    ```
+5.  Inicie o servidor de desenvolvimento: `npm run dev`
+
+A aplicação estará disponível em `http://localhost:5173` (ou outra porta indicada pelo Vite).
+
+---
+
+### 👨‍💻 Autor
+
+* **[Pedro Urio]** - [https://www.linkedin.com/in/pedro-henrique-u-4476aa257/]
+
+---
+
+### 📄 Licença
+
+Este projeto está sob a licença MIT.
